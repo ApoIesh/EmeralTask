@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "android_c": "cd android && ./gradlew clean && cd ..",
+    "android_p": "cd android && gradlew clean && cd .. && cd android && gradlew assembleRelease && cd .. && react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "(eslint lib || true) && jest",
@@ -12,6 +13,7 @@
     "build": "babel src -d lib"
   },
   "dependencies": {
+    "@react-native-menu/menu": "^0.5.2",
     "axios": "^0.26.1",
     "react": "17.0.1",
     "react-native": "0.64.2",

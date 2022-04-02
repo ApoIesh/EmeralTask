@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, StatusBar, FlatList } from 'react-native';
+import { View, Text, ScrollView, Image, StatusBar, FlatList, TouchableOpacity } from 'react-native';
 import { baseUrl } from '../Config';
 import { _getData } from '../actions'
 import { connect } from 'react-redux';
@@ -12,12 +12,15 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-class MainScreen extends Component {  
+class MainScreen extends Component {
     constructor(props) {
         const { _getData } = props
         super(props);
         this.state = {
-            starCount: 4
+            starCount: 4,
+            sec_border: 0,
+            menu: false
+
         };
         _getData()
     }
@@ -43,13 +46,18 @@ class MainScreen extends Component {
             </View>
         )
     }
+
     render() {
 
         // STATE:
-        const { starCount } = this.state
+        const { starCount, sec_border, menu } = this.state
         // PROPS:
         const { data } = this.props
         // OTHER
+        const names = data[0]?.title
+        const nameList = names?.split('', 7)
+
+
         const flatlist_data = [
             {}, {}, {}, {}, {}, {}, {},
             {}, {}, {}, {}, {}, {}, {}
@@ -64,21 +72,26 @@ class MainScreen extends Component {
                         backgroundColor={white_color}
                         barStyle={'dark-content'}
                     />
+
+
                     <View style={styles.headerView}>
-
-                        <Feather
-                            name='arrow-left-circle'
-                            size={wp(7)}
-                            color={Primary_color}
-                        />
-
+                        <TouchableOpacity>
+                            <Feather
+                                name='arrow-left-circle'
+                                size={wp(7)}
+                                color={Primary_color}
+                            />
+                        </TouchableOpacity>
                         <Text style={styles.TitleText}>{'Events'}</Text>
-
-                        <Feather
-                            name='more-horizontal'
-                            size={wp(7)}
-                            color={Primary_color}
-                        />
+                        <TouchableOpacity
+                            onPress={() => this.setState({ menu: !menu })}
+                        >
+                            <Feather
+                                name='more-horizontal'
+                                size={wp(7)}
+                                color={Primary_color}
+                            />
+                        </TouchableOpacity>
                     </View>
 
 
@@ -111,19 +124,34 @@ class MainScreen extends Component {
                     </View>
                     <View style={styles.sec_view}>
 
+                        <TouchableOpacity style={{
+                            ...styles.goingView,
+                            borderColor: sec_border == 0 ? Primary_color : light_gray_color,
+                            borderWidth: sec_border == 0 ? wp(.7) : wp(.2)
 
-                        <View style={styles.goingView}>
+                        }}
+                            onPress={() => this.setState({ sec_border: 0 })}
+                            activeOpacity={.9}>
                             <Text style={styles.subtTilte}>{'Going'}</Text>
                             <Text style={styles.HeadRedTitle}>{'2K'}</Text>
-                        </View>
+                        </TouchableOpacity>
 
-                        <View style={styles.interestedView}>
+                        <TouchableOpacity style={{
+                            ...styles.interestedView,
+                            borderColor: sec_border == 1 ? Primary_color : light_gray_color,
+                            borderWidth: sec_border == 1 ? wp(.7) : wp(.2)
+                        }}
+
+                            onPress={() => this.setState({ sec_border: 1 })}
+                            activeOpacity={.9}>
                             <Text style={styles.subtTilte}>{'Interested'}</Text>
                             <Text style={styles.HeadRedTitle}>{'76K'}</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
 
-                    <View style={styles.qrView}>
+                    <TouchableOpacity
+                        activeOpacity={.9}
+                        style={styles.qrView}>
                         <Image
                             resizeMode='cover'
                             resizeMethod='scale'
@@ -140,7 +168,7 @@ class MainScreen extends Component {
                             color={gray_color}
                         />
 
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={styles.Sec_line} />
                     <View>
@@ -154,7 +182,7 @@ class MainScreen extends Component {
                                     marginHorizontal: wp(3)
                                 }}
                             />
-                            <Text style={styles.TitleText}>{'Organizers'}</Text>
+                            <Text style={styles.TitleText}>{nameList}</Text>
                         </View>
 
                         <View style={styles.iconsLines}>
@@ -166,7 +194,7 @@ class MainScreen extends Component {
                                     marginHorizontal: wp(3)
                                 }}
                             />
-                            <Text style={styles.TitleText}>{'Place'}</Text>
+                            <Text style={styles.TitleText}>{nameList}</Text>
                         </View>
 
                         <View style={styles.iconsLines}>
@@ -178,7 +206,7 @@ class MainScreen extends Component {
                                     marginHorizontal: wp(3)
                                 }}
                             />
-                            <Text style={styles.TitleText}>{'Time : 5L30pm 7:30pm'}</Text>
+                            <Text style={styles.TitleText}>{nameList}</Text>
                         </View>
 
                         <View style={styles.iconsLines}>
@@ -190,7 +218,7 @@ class MainScreen extends Component {
                                     marginHorizontal: wp(3)
                                 }}
                             />
-                            <Text style={styles.TitleText}>{'Date'}</Text>
+                            <Text style={styles.TitleText}>{nameList}</Text>
                         </View>
 
                         <View style={styles.iconsLines}>
@@ -202,7 +230,7 @@ class MainScreen extends Component {
                                     marginHorizontal: wp(3)
                                 }}
                             />
-                            <Text style={styles.TitleText}>{'Price'}</Text>
+                            <Text style={styles.TitleText}>{nameList}</Text>
                         </View>
 
                         <View style={styles.iconsLines}>
@@ -214,7 +242,7 @@ class MainScreen extends Component {
                                     marginHorizontal: wp(3)
                                 }}
                             />
-                            <Text style={styles.TitleText}>{'Online or inpreson'}</Text>
+                            <Text style={styles.TitleText}>{nameList}</Text>
                         </View>
 
                     </View>
@@ -259,8 +287,25 @@ class MainScreen extends Component {
                             keyExtractor={item => item}
                         />
                     </View>
-                </ScrollView>
-            </View>
+                </ScrollView >
+                {menu ?
+                    <View style={styles.Sec_menu}>
+                        <View style={styles.line_menu} />
+
+                        <Text style={styles.whiteText}>{'Edit Event'}</Text>
+
+                        <View style={styles.Sec_line_menu} />
+
+                        <Text style={styles.whiteText}>{'Cancel Event'}</Text>
+
+                        <View style={styles.Sec_line_menu} />
+
+                        <Text style={styles.whiteText}>{'Delete Event'}</Text>
+
+                    </View>
+                    : null
+                }
+            </View >
         );
     }
 }

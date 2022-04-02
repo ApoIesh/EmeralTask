@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
     fontSize: wp(3.4),
     fontWeight: '700'
   },
+  whiteText: {
+    fontSize: wp(4),
+    color: white_color
+
+  },
   smallredText: {
     fontSize: wp(3.5),
     color: Primary_color,
@@ -103,7 +108,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   goingView: {
-    width: wp(44), height: hp(10),
+    width: wp(44),
+    height: hp(10),
     borderRadius: wp(4),
     borderWidth: wp(.2),
     backgroundColor: white_color,
@@ -114,7 +120,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   interestedView: {
-    width: wp(44), height: hp(10),
+    width: wp(44),
+    height: hp(10),
     borderRadius: wp(4),
     borderWidth: wp(.7),
     backgroundColor: white_color,
@@ -175,6 +182,31 @@ const styles = StyleSheet.create({
   iconSearchView: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  Sec_line_menu: {
+    width: wp(64),
+    height: .5,
+    backgroundColor: light_gray_color,
+    alignSelf: 'center',
+    marginVertical: wp(2)
+  },
+  line_menu: {
+    borderWidth: wp(.7),
+    width: wp(11),
+    alignSelf: 'center',
+    marginVertical: wp(3),
+    borderColor: light_gray_color,
+    borderRadius: wp(1.5),
+  },
+  Sec_menu: {
+    position: 'absolute',
+    width: wp(64),
+    height: hp(22),
+    backgroundColor: Primary_color,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    borderRadius: wp(5),
+    marginVertical: wp(13),
   }
 
 

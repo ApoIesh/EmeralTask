@@ -33,6 +33,7 @@ class MainScreen extends Component {
                     alignItems: "center",
                     justifyContent: 'center',
                 }}>
+
                 <Image
                     resizeMode='cover'
                     resizeMethod='scale'
@@ -42,7 +43,9 @@ class MainScreen extends Component {
                     }}
                     source={require('./Assets/Images/head.png')}
                 />
+
                 <Text style={styles.smallredText} >{'Malika'}</Text>
+
             </View>
         )
     }
@@ -54,25 +57,25 @@ class MainScreen extends Component {
         // PROPS:
         const { data } = this.props
         // OTHER
-        const names = data[0]?.title
-        const nameList = names?.split('', 7)
-
+        const nameList = data[0]?.title.split('', 7)
 
         const flatlist_data = [
             {}, {}, {}, {}, {}, {}, {},
             {}, {}, {}, {}, {}, {}, {}
         ]
+
         return (
             <View style={styles.container}>
+
                 <ScrollView
                     scrollEventThrottle={16}
                 >
+
                     <StatusBar
                         animated={true}
                         backgroundColor={white_color}
                         barStyle={'dark-content'}
                     />
-
 
                     <View style={styles.headerView}>
                         <TouchableOpacity>
@@ -94,14 +97,13 @@ class MainScreen extends Component {
                         </TouchableOpacity>
                     </View>
 
-
-
                     <Image
                         resizeMode='cover'
                         resizeMethod='scale'
                         style={styles.imageView}
                         source={require('./Assets/Images/head.png')}
                     />
+
                     <View style={styles.TitelText}>
                         <Text style={styles.smallredText}>{'JULY 16TH PM UTC + 04 - JULY 19TH'}</Text>
                         <Text style={styles.boldTitle}>{'Business Development'}</Text>
@@ -109,6 +111,7 @@ class MainScreen extends Component {
                         <Text style={styles.TitleText}>{'Online Event'}</Text>
 
                     </View>
+
                     <View
                         style={styles.stareView}
                     >
@@ -122,6 +125,7 @@ class MainScreen extends Component {
                             rating={starCount}
                         />
                     </View>
+
                     <View style={styles.sec_view}>
 
                         <TouchableOpacity style={{
@@ -171,6 +175,7 @@ class MainScreen extends Component {
                     </TouchableOpacity>
 
                     <View style={styles.Sec_line} />
+
                     <View>
 
                         <View style={styles.iconsLines}>
@@ -253,8 +258,7 @@ class MainScreen extends Component {
                         <Text style={styles.TitleText}>{'More About Event'}</Text>
                     </View>
                     <View style={styles._getData}>
-                        <Text
-                            style={styles._getDataView}>{data[0]?.body}</Text>
+                        <Text style={styles._getDataView}>{data[0]?.body}</Text>
                     </View>
 
                     <View style={styles.Sec_line} />
@@ -275,7 +279,6 @@ class MainScreen extends Component {
                     </View>
 
                     <View>
-
                         <FlatList
                             style={{ width: wp(86), alignSelf: 'center', marginVertical: hp(2) }}
                             key={'!'}
@@ -288,20 +291,15 @@ class MainScreen extends Component {
                         />
                     </View>
                 </ScrollView >
+
                 {menu ?
                     <View style={styles.Sec_menu}>
                         <View style={styles.line_menu} />
-
                         <Text style={styles.whiteText}>{'Edit Event'}</Text>
-
                         <View style={styles.Sec_line_menu} />
-
                         <Text style={styles.whiteText}>{'Cancel Event'}</Text>
-
                         <View style={styles.Sec_line_menu} />
-
                         <Text style={styles.whiteText}>{'Delete Event'}</Text>
-
                     </View>
                     : null
                 }
@@ -316,7 +314,6 @@ const mapStateToProps = ({ auth }) => {
     const {
         data
     } = auth;
-
     return {
         data
     };
